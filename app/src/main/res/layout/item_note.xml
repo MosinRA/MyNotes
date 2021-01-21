@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/ground"
-    app:cardCornerRadius="@dimen/size_10dp"
-    app:cardElevation="@dimen/size_5dp"
+    app:cardCornerRadius="@dimen/cardview_radius_corner"
+    app:cardElevation="@dimen/cardview_elevation"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -21,10 +21,10 @@
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_8dp"
-            android:layout_marginTop="@dimen/size_8dp"
-            android:layout_marginEnd="@dimen/size_8dp"
-            android:textSize="@dimen/size_20sp"
+            android:layout_marginStart="@dimen/cardview_padding_start"
+            android:layout_marginTop="@dimen/cardview_paddingtop"
+            android:layout_marginEnd="@dimen/cardview_paddingend"
+            android:textSize="@dimen/cardview_text_size_title"
             android:textColor="@color/white"
             android:textStyle="bold"
             tools:text="@string/title_notes" />
@@ -34,8 +34,8 @@
             style="@style/TextAppearance.AppCompat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_8dp"
-            android:textSize="@dimen/size_15sp"
+            android:layout_margin="@dimen/cardview_layout_margin"
+            android:textSize="@dimen/cardview_text_size_note"
             android:textColor="@color/white"
             android:textStyle="italic"
             tools:text="@string/text_notes" />

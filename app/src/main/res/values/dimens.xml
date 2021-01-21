@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="size_8dp">8dp</dimen>
-    <dimen name="size_10dp">10dp</dimen>
-    <dimen name="size_5dp">5dp</dimen>
-    <dimen name="size_20sp">20sp</dimen>
-    <dimen name="size_15sp">15sp</dimen>
+    <dimen name="cardview_radius_corner">10dp</dimen>
+    <dimen name="cardview_elevation">5dp</dimen>
+    <dimen name="cardview_padding_start">8dp</dimen>
+    <dimen name="cardview_paddingtop">8dp</dimen>
+    <dimen name="cardview_paddingend">8dp</dimen>
+    <dimen name="cardview_text_size_title">20sp</dimen>
+    <dimen name="cardview_layout_margin">8dp</dimen>
+    <dimen name="cardview_text_size_note">15sp</dimen>
 </resources>
