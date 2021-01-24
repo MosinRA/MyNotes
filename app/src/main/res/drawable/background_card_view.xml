@@ -4,13 +4,13 @@
     android:shape="rectangle">
     <stroke
         android:width="1dp"
-        android:color="@color/ground">
+        android:color="@color/white">
     </stroke>
     <gradient
         android:type="radial"
         android:gradientRadius="300"
         android:startColor="@color/ground_center"
-        android:endColor="@color/ground"
+        android:endColor="@color/white"
         android:centerX="0.5"
         android:centerY="0.5">
     </gradient>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mosin.mynotes.databinding.ActivityMainBinding
+import com.mosin.mynotes.model.Note
 import com.mosin.mynotes.viewModel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -20,11 +21,22 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(ui.toolbar)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        mainAdapter = ViewAdapter()
+        mainAdapter = ViewAdapter(object : OnItemClickListener {
+            override fun onItemClick(note: Note) {
+                openNoteScreen(note)
+            }
+
+        })
         ui.mainRecycler.adapter = mainAdapter
 
         viewModel.viewState().observe(this, Observer<MainViewState> { state ->
             state?.let { mainAdapter.notes = state.notes }
         })
+
+        ui.fab.setOnClickListener { openNoteScreen() }
+    }
+
+    private fun openNoteScreen(note: Note? = null){
+        startActivity(NoteActivity.getStartIntent(this, note))
     }
 }

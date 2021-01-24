@@ -8,4 +8,5 @@
     <dimen name="cardview_text_size_title">20sp</dimen>
     <dimen name="cardview_layout_margin">8dp</dimen>
     <dimen name="cardview_text_size_note">15sp</dimen>
+    <dimen name="toolbar_height">50dp</dimen>
 </resources>

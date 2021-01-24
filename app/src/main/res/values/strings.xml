@@ -3,4 +3,7 @@
     <string name="my_notes">МОИ ЗАМЕТКИ</string>
     <string name="text_notes">Текст заметки</string>
     <string name="title_notes">Название заметки</string>
+    <string name="new_note_title">Новая заметка</string>
+    <string name="text_changed">Изменено:</string>
+
 </resources>
