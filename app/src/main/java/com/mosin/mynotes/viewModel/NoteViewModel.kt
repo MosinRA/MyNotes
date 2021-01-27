@@ -1,16 +1,16 @@
 package com.mosin.mynotes.viewModel
 
-import androidx.lifecycle.ViewModel
-import com.mosin.mynotes.databinding.ActivityNoteBinding
+import androidx.lifecycle.Observer
 import com.mosin.mynotes.model.Note
+import com.mosin.mynotes.model.NoteResult
 import com.mosin.mynotes.model.Repository
-import java.util.*
+import com.mosin.mynotes.ui.BaseViewModel
+import com.mosin.mynotes.ui.NoteViewState
 
-class NoteViewModel(private val repository: Repository = Repository) : ViewModel() {
+class NoteViewModel(val repository: Repository = Repository) :
+        BaseViewModel<Note?, NoteViewState>() {
 
     private var pendingNote: Note? = null
-    private lateinit var ui: ActivityNoteBinding
-    private val id: String = UUID.randomUUID().toString()
 
     fun saveChanges(note: Note) {
         pendingNote = note
@@ -18,12 +18,23 @@ class NoteViewModel(private val repository: Repository = Repository) : ViewModel
 
     override fun onCleared() {
         if (pendingNote != null) {
-            UUID.randomUUID().toString()
             repository.saveNote(pendingNote!!)
         }
     }
 
-    fun getId(): String {
-        return id
+    fun loadNote(noteId: String) {
+        repository.getNoteById(noteId).observeForever(object :
+                Observer<NoteResult> {
+            override fun onChanged(t: NoteResult?) {
+                if (t == null) return
+
+                when (t) {
+                    is NoteResult.Success<*> ->
+                        viewStateLiveData.value = NoteViewState(note = t.data as? Note)
+                    is NoteResult.Error ->
+                        viewStateLiveData.value = NoteViewState(error = t.error)
+                }
+            }
+        })
     }
 }
