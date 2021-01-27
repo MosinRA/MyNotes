@@ -1,15 +1,15 @@
 package com.mosin.mynotes.model
 
 import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
 data class Note(
-        val id: String,
-        val title: String,
-        val note: String,
-        val color: Color = Color.WHITE,
+        val id: String = "",
+        val title: String = "",
+        val note: String = "",
+        val color: Color = Color.GREEN,
         val lastChange: Date = Date()
 ) : Parcelable {
 
@@ -20,7 +20,6 @@ data class Note(
         other as Note
 
         if (id != other.id) return false
-
         return true
     }
 

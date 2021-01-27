@@ -5,5 +5,7 @@
     <string name="title_notes">Название заметки</string>
     <string name="new_note_title">Новая заметка</string>
     <string name="text_changed">Изменено:</string>
+    <string name="ok_bth_title">Ок</string>
+
 
 </resources>

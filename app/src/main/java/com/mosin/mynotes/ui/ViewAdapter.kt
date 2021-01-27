@@ -1,15 +1,8 @@
 package com.mosin.mynotes.ui
 
-import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.DrawableContainer
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.Shape
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.mosin.mynotes.R
 import com.mosin.mynotes.databinding.ItemNoteBinding
@@ -20,7 +13,8 @@ interface OnItemClickListener {
     fun onItemClick(note: Note)
 }
 
-class ViewAdapter(private val OnItemClickListener: OnItemClickListener) : RecyclerView.Adapter<ViewAdapter.NoteViewHolder>() {
+class ViewAdapter(private val OnItemClickListener: OnItemClickListener) :
+        RecyclerView.Adapter<ViewAdapter.NoteViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -48,7 +42,7 @@ class ViewAdapter(private val OnItemClickListener: OnItemClickListener) : Recycl
             ui.title.text = note.title
             ui.body.text = note.note
 
-            val color = when (note?.color) {
+            val color = when (note.color) {
                 Color.WHITE -> R.color.color_white
                 Color.VIOLET -> R.color.color_violet
                 Color.YELLOW -> R.color.color_yellow
@@ -59,7 +53,7 @@ class ViewAdapter(private val OnItemClickListener: OnItemClickListener) : Recycl
             }
 
             ui.card.setBackgroundResource(color)
-            itemView.setOnClickListener {(OnItemClickListener.onItemClick(note))}
+            itemView.setOnClickListener { (OnItemClickListener.onItemClick(note)) }
         }
     }
 }
