@@ -4,10 +4,10 @@ import androidx.lifecycle.Observer
 import com.mosin.mynotes.model.Note
 import com.mosin.mynotes.model.NoteResult
 import com.mosin.mynotes.model.Repository
-import com.mosin.mynotes.ui.BaseViewModel
-import com.mosin.mynotes.ui.NoteViewState
+import com.mosin.mynotes.ui.base.BaseViewModel
+import com.mosin.mynotes.ui.note.NoteViewState
 
-class NoteViewModel(val repository: Repository = Repository) :
+class NoteViewModel(private val repository: Repository = Repository) :
         BaseViewModel<Note?, NoteViewState>() {
 
     private var pendingNote: Note? = null

@@ -1,4 +1,4 @@
-package com.mosin.mynotes.ui
+package com.mosin.mynotes.ui.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
