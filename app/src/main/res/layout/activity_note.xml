@@ -6,6 +6,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
+        android:background="@drawable/background_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -13,7 +14,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextColor="@color/black" />
     </com.google.android.material.appbar.AppBarLayout>

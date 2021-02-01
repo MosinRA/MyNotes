@@ -1,4 +1,4 @@
-package com.mosin.mynotes.ui
+package com.mosin.mynotes.ui.note
 
 import android.content.Context
 import android.content.Intent
@@ -11,14 +11,16 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import com.mosin.mynotes.R
 import com.mosin.mynotes.databinding.ActivityNoteBinding
-import com.mosin.mynotes.model.Color
 import com.mosin.mynotes.model.Note
+import com.mosin.mynotes.ui.base.BaseActivity
+import com.mosin.mynotes.ui.main.format
+import com.mosin.mynotes.ui.main.getColorInt
 import com.mosin.mynotes.viewModel.NoteViewModel
 import java.util.*
 
 private const val SAVE_DELAY = 1000L
 
-class NoteActivity : BaseActivity<Note?, NoteViewState, ActivityNoteBinding>(ActivityNoteBinding::inflate) {
+class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     companion object {
         const val EXTRA_NOTE = "NoteActivity.extra.NOTE"
@@ -33,6 +35,8 @@ class NoteActivity : BaseActivity<Note?, NoteViewState, ActivityNoteBinding>(Act
     private var note: Note? = null
     override val viewModel: NoteViewModel by lazy { ViewModelProvider(this).get(NoteViewModel::class.java) }
     override val layoutRes: Int = R.layout.activity_note
+    override val ui: ActivityNoteBinding
+            by lazy { ActivityNoteBinding.inflate(layoutInflater) }
 
     private val textChangeListener = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -50,41 +54,30 @@ class NoteActivity : BaseActivity<Note?, NoteViewState, ActivityNoteBinding>(Act
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(ui.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val noteId = intent.getStringExtra(EXTRA_NOTE)
         noteId?.let {
             viewModel.loadNote(it)
+        } ?: kotlin.run {
+            supportActionBar?.title = getString(R.string.new_note_title)
+            ui.toolbar.setBackgroundColor(R.drawable.background_card_view)
         }
 
-        if (noteId == null) {
-            supportActionBar?.title = getString(R.string.new_note_title)
-            initViews()
-        } else {
-            //не получилось разобраться с подтягиванием даты =(
-            supportActionBar?.title = getString(R.string.text_changed)
-            initViews()
-        }
+        ui.titleEt.addTextChangedListener(textChangeListener)
+        ui.bodyEt.addTextChangedListener(textChangeListener)
     }
 
     private fun initViews() {
-        binding.titleEt.setText(note?.title ?: "")
-        binding.bodyEt.setText(note?.note ?: "")
-
-        val color = when (note?.color) {
-            Color.WHITE -> R.color.color_white
-            Color.VIOLET -> R.color.color_violet
-            Color.YELLOW -> R.color.color_yellow
-            Color.RED -> R.color.color_red
-            Color.PINK -> R.color.color_pink
-            Color.GREEN -> R.color.color_green
-            Color.BLUE -> R.color.color_blue
-            else -> R.color.color_white
+        note?.run {
+            ui.toolbar.setBackgroundColor(color.getColorInt(this@NoteActivity))
+            ui.titleEt.setText(title)
+            ui.bodyEt.setText(note)
+            supportActionBar?.title = getString(R.string.text_changed) + " " + lastChange.format()
         }
-        binding.toolbar.setBackgroundColor(resources.getColor(color))
-        binding.titleEt.addTextChangedListener(textChangeListener)
-        binding.bodyEt.addTextChangedListener(textChangeListener)
+        ui.titleEt.addTextChangedListener(textChangeListener)
+        ui.bodyEt.addTextChangedListener(textChangeListener)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -97,15 +90,15 @@ class NoteActivity : BaseActivity<Note?, NoteViewState, ActivityNoteBinding>(Act
 
     private fun createNewNote(): Note = Note(
             UUID.randomUUID().toString(),
-            binding.titleEt.text.toString(),
-            binding.bodyEt.text.toString())
+            ui.titleEt.text.toString(),
+            ui.bodyEt.text.toString())
 
     private fun triggerSaveNote() {
-        if (binding.titleEt.text == null || binding.titleEt.text!!.length < 3) return
+        if (ui.titleEt.text == null || ui.titleEt.text!!.length < 3) return
 
         Handler(Looper.getMainLooper()).postDelayed({
-            note = note?.copy(title = binding.titleEt.text.toString(),
-                    note = binding.bodyEt.text.toString(),
+            note = note?.copy(title = ui.titleEt.text.toString(),
+                    note = ui.bodyEt.text.toString(),
                     lastChange = Date()
             ) ?: createNewNote()
 

@@ -1,4 +1,4 @@
-package com.mosin.mynotes.ui
+package com.mosin.mynotes.ui.main
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,6 @@ import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 class FABBehavior(context: Context, attributeSet: AttributeSet)
     : FloatingActionButton.Behavior(context, attributeSet) {

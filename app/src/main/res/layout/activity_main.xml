@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -39,8 +39,10 @@
         android:layout_marginBottom="@dimen/floating_btn_marginBottom"
         android:contentDescription="TODO"
         android:src="@drawable/ic_add"
+        android:backgroundTint="@color/ground"
         app:fabSize="normal"
         app:layout_anchor="@id/mainRecycler"
         app:layout_anchorGravity="bottom|end"
-        app:layout_behavior=".ui.FABBehavior" />
+        app:layout_behavior=".ui.main.FABBehavior"
+       />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
