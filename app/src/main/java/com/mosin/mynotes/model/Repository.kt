@@ -2,25 +2,11 @@ package com.mosin.mynotes.model
 
 object Repository {
 
-    val notes: List<Note> = listOf(
-            Note(
-                    "Название заметки",
-                    "Текст заметки",
-            ),
-            Note(
-                    "Название заметки",
-                    "Текст заметки",
-            ),
-            Note(
-                    "Название заметки",
-                    "Текст заметки",
-            ),
-            Note(
-                    "Название заметки",
-                    "Текст заметки",
-            ),
-            Note(
-                    "Название заметки",
-                    "Текст заметки",
-            ))
+    private val remoteDataProvider: IRemoteDataProvider = FireStoreProvider()
+
+    fun getNotes() = remoteDataProvider.subscribeToAllNotes()
+
+    fun saveNote(note: Note) = remoteDataProvider.saveNote(note)
+
+    fun getNoteById(id: String) = remoteDataProvider.getNoteById(id)
 }

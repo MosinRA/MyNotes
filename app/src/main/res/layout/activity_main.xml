@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ground"
     android:fitsSystemWindows="true"
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/toolbar_height">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/background_card_view"
             app:layout_scrollFlags="scroll|enterAlways"
             app:title="@string/my_notes"
-            app:titleTextColor="@color/white" />
-
+            app:titleTextColor="@color/black" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,4 +31,16 @@
         app:spanCount="2"
         tools:listitem="@layout/item_note" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/float_btn_marginEnd"
+        android:layout_marginBottom="@dimen/floating_btn_marginBottom"
+        android:contentDescription="TODO"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal"
+        app:layout_anchor="@id/mainRecycler"
+        app:layout_anchorGravity="bottom|end"
+        app:layout_behavior=".ui.FABBehavior" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
