@@ -1,4 +1,4 @@
-package com.mosin.mynotes.model
+package com.mosin.mynotes.model.note
 
 sealed class NoteResult {
 

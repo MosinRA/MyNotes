@@ -37,12 +37,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/float_btn_marginEnd"
         android:layout_marginBottom="@dimen/floating_btn_marginBottom"
-        android:contentDescription="TODO"
-        android:src="@drawable/ic_add"
-        android:backgroundTint="@color/ground"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/add_btn"
+        app:backgroundTint="#070707"
         app:fabSize="normal"
         app:layout_anchor="@id/mainRecycler"
         app:layout_anchorGravity="bottom|end"
         app:layout_behavior=".ui.main.FABBehavior"
-       />
+        android:contentDescription="TODO" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

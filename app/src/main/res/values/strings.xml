@@ -10,4 +10,9 @@
     <string name="logout_dialog_title">Выйти из аккаунта?</string>
     <string name="logout_dialog_message">Все ваши заметки будут сохранены. Вы сможете получить к ним доступ после авторизации.</string>
     <string name="logout_dialog_cancel">Отмена</string>
+    <string name="text_btn_save">Сохранить</string>
+    <string name="change_color_menu_title">Изменить цвет</string>
+    <string name="delete_menu_title">Удалить заметку</string>
+    <string name="delete_dialog_message">Вы действительно хотите удалить заметку?</string>
+    <string name="cancel_btn_title">Отмена</string>
 </resources>
