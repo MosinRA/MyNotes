@@ -1,4 +1,4 @@
-package com.mosin.mynotes.ui
+package com.mosin.mynotes.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +28,7 @@ class ViewAdapter(private val OnItemClickListener: OnItemClickListener) :
         return NoteViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewAdapter.NoteViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         holder.bind(notes[position])
     }
 
