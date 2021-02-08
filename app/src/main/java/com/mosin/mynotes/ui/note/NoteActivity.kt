@@ -64,7 +64,7 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         val noteId = intent.getStringExtra(EXTRA_NOTE)
         noteId?.let {
             viewModel.loadNote(it)
-        } ?: kotlin.run {
+        } ?: run {
             supportActionBar?.title = getString(R.string.new_note_title)
             ui.toolbar.setBackgroundColor(R.drawable.background_card_view)
         }
@@ -128,19 +128,20 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
                 }
                 .setPositiveButton(R.string.ok_bth_title) { _, _ ->
                     viewModel.deleteNote()
-                    setProgressBarVisible()
+                    if (note?.id != null)  setProgressBarVisible()
                 }
                 .show()
     }
 
     private fun onClickSaveBtnBehavior() {
-        ui.saveBtn.setOnClickListener(View.OnClickListener { onBackPressed() })
+        ui.saveBtn.setOnClickListener(View.OnClickListener { super.onBackPressed() })
     }
 
     private fun createNewNote(): Note = Note(
             UUID.randomUUID().toString(),
             ui.titleEt.text.toString(),
-            ui.bodyEt.text.toString())
+            ui.bodyEt.text.toString(),
+            color = color)
 
     private fun triggerSaveNote() {
         if (ui.titleEt.text == null || ui.titleEt.text!!.length < 3) return

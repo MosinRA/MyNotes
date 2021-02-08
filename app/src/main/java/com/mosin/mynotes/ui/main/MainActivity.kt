@@ -18,7 +18,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
 
-    override val viewModel: MainViewModel by viewModel()
+    override val viewModel: MainViewModel
+            by viewModel()
 
     override val ui: ActivityMainBinding
             by lazy { ActivityMainBinding.inflate(layoutInflater) }

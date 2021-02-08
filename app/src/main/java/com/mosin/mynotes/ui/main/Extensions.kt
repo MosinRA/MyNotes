@@ -25,3 +25,10 @@ fun Color.getColorRes(): Int = when (this) {
 }
 
 fun Context.dip(value: Int): Int = (value * resources.displayMetrics.density).toInt()
+
+fun sortDescAndDistinctAndRemoteNulls(list: List<Int?>?): List<Int> =
+        list?.filterNotNull()
+                ?.distinct()
+                ?.sorted()
+                ?.reversed()
+                ?: listOf()

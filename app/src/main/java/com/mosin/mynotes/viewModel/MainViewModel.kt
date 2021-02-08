@@ -1,5 +1,6 @@
 package com.mosin.mynotes.viewModel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Observer
 import com.mosin.mynotes.model.note.Note
 import com.mosin.mynotes.model.note.NoteResult
@@ -31,7 +32,8 @@ class MainViewModel(private val repository: Repository) :
         repositoryNotes.observeForever(notesObserver)
     }
 
-    override fun onCleared() {
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public override fun onCleared() {
         repositoryNotes.removeObserver(notesObserver)
     }
 }

@@ -1,4 +1,4 @@
-package com.mosin.mynotes;
+package com.mosin.mynotes.viewModel;
 
 import org.junit.Test;
 
