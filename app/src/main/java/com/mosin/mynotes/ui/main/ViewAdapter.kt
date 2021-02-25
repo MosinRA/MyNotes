@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mosin.mynotes.R
 import com.mosin.mynotes.databinding.ItemNoteBinding
-import com.mosin.mynotes.model.Color
-import com.mosin.mynotes.model.Note
+import com.mosin.mynotes.model.note.Note
 
 interface OnItemClickListener {
     fun onItemClick(note: Note)
@@ -42,17 +41,7 @@ class ViewAdapter(private val OnItemClickListener: OnItemClickListener) :
             ui.title.text = note.title
             ui.body.text = note.note
 
-            val color = when (note.color) {
-                Color.WHITE -> R.color.color_white
-                Color.VIOLET -> R.color.color_violet
-                Color.YELLOW -> R.color.color_yellow
-                Color.RED -> R.color.color_red
-                Color.PINK -> R.color.color_pink
-                Color.GREEN -> R.color.color_green
-                Color.BLUE -> R.color.color_blue
-            }
-
-            ui.card.setBackgroundResource(color)
+            ui.cardViewContainer.setCardBackgroundColor(note.color.getColorInt(itemView.context))
             itemView.setOnClickListener { (OnItemClickListener.onItemClick(note)) }
         }
     }

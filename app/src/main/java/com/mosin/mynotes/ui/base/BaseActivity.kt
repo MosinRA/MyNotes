@@ -8,7 +8,7 @@ import androidx.viewbinding.ViewBinding
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.snackbar.Snackbar
 import com.mosin.mynotes.R
-import com.mosin.mynotes.model.NoAuthException
+import com.mosin.mynotes.model.auth.NoAuthException
 
 private const val RC_SIGN_IN = 458
 
@@ -67,5 +67,4 @@ abstract class BaseActivity<T, VS : BaseViewState<T>> : AppCompatActivity() {
             finish()
         }
     }
-
 }

@@ -6,22 +6,20 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProvider
 import com.firebase.ui.auth.AuthUI
 import com.mosin.mynotes.R
 import com.mosin.mynotes.databinding.ActivityMainBinding
-import com.mosin.mynotes.model.Note
+import com.mosin.mynotes.model.note.Note
 import com.mosin.mynotes.ui.base.BaseActivity
 import com.mosin.mynotes.ui.splash.SplashActivity
 import com.mosin.mynotes.ui.note.NoteActivity
 import com.mosin.mynotes.viewModel.MainViewModel
-
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
 
-    override val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
+    override val viewModel: MainViewModel by viewModel()
+
     override val ui: ActivityMainBinding
             by lazy { ActivityMainBinding.inflate(layoutInflater) }
 

@@ -1,4 +1,4 @@
-package com.mosin.mynotes.model
+package com.mosin.mynotes.model.note
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -9,7 +9,7 @@ data class Note(
         val id: String = "",
         val title: String = "",
         val note: String = "",
-        val color: Color = Color.GREEN,
+        val color: Color = Color.WHITE,
         val lastChange: Date = Date()
 ) : Parcelable {
 
