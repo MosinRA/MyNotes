@@ -1,40 +1,34 @@
 package com.mosin.mynotes.viewModel
 
-import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.Observer
 import com.mosin.mynotes.model.note.Note
 import com.mosin.mynotes.model.note.NoteResult
 import com.mosin.mynotes.model.repository.Repository
 import com.mosin.mynotes.ui.base.BaseViewModel
-import com.mosin.mynotes.ui.main.MainViewState
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainViewModel(private val repository: Repository) :
-        BaseViewModel<List<Note>?, MainViewState>() {
+        BaseViewModel<List<Note>?>() {
 
-    private val notesObserver = object : Observer<NoteResult> {
-        override fun onChanged(t: NoteResult?) {
-            if (t == null) return
+    private val notesChannel by lazy {
+        runBlocking { repository.getNotes() }
+    }
 
-            when (t) {
-                is NoteResult.Success<*> -> {
-                    viewStateLiveData.value = MainViewState(notes = t.data as? List<Note>)
-                }
-                is NoteResult.Error -> {
-                    viewStateLiveData.value = MainViewState(error = t.error)
+    init {
+        launch {
+            notesChannel.consumeEach { result ->
+                when (result) {
+                    is NoteResult.Success<*> -> setData(result.data as? List<Note>)
+                    is NoteResult.Error -> setError(result.error)
                 }
             }
         }
     }
-    private val repositoryNotes = repository.getNotes()
 
-    init {
-        viewStateLiveData.value = MainViewState()
-        repositoryNotes.observeForever(notesObserver)
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     public override fun onCleared() {
-        repositoryNotes.removeObserver(notesObserver)
+        notesChannel.cancel()
+        super.onCleared()
     }
 }
 
