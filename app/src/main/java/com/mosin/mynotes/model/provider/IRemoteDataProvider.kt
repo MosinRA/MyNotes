@@ -1,15 +1,15 @@
 package com.mosin.mynotes.model.provider
 
-import androidx.lifecycle.LiveData
 import com.mosin.mynotes.model.note.Note
 import com.mosin.mynotes.model.note.NoteResult
 import com.mosin.mynotes.model.auth.User
+import kotlinx.coroutines.channels.ReceiveChannel
 
 interface IRemoteDataProvider {
 
-    fun subscribeToAllNotes(): LiveData<NoteResult>
-    fun getNoteById(id: String): LiveData<NoteResult>
-    fun saveNote(note: Note): LiveData<NoteResult>
-    fun getCurrentUser(): LiveData<User?>
-    fun deleteNote(noteId: String): LiveData<NoteResult>
+    suspend fun subscribeToAllNotes(): ReceiveChannel<NoteResult>
+    suspend fun getNoteById(id: String): Note
+    suspend fun saveNote(note: Note): Note
+    suspend fun getCurrentUser(): User
+    suspend fun deleteNote(noteId: String): Note?
 }
